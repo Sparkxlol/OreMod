@@ -1,0 +1,15 @@
+{
+  "item.testmodding.ruby": "Ruby",
+  "block.testmodding.ruby_block": "Block of Ruby",
+  "block.testmodding.ruby_ore": "Ruby Ore",
+  "item.testmodding.sapphire": "Sapphire",
+  "block.testmodding.sapphire_block": "Block of Sapphire",
+  "item.testmodding.amethyst": "Amethyst",
+  "item.testmodding.ruby_helmet": "Ruby Helmet",
+  "item.testmodding.ruby_chestplate": "Ruby Chestplate",
+  "item.testmodding.ruby_leggings": "Ruby Leggings",
+  "item.testmodding.ruby_boots": "Ruby Boots",
+  "block.testmodding.amethyst_block": "Block of Amethyst",
+  "itemGroup.testmodding.general": "Test Modding",
+  "itemGroup.testmodding.gems": "Gems"
+}
