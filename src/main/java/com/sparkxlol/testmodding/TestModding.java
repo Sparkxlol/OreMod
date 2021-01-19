@@ -23,6 +23,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
 import net.minecraft.world.gen.decorator.Decorator;
 import net.minecraft.world.gen.decorator.RangeDecoratorConfig;
@@ -56,7 +57,6 @@ public class TestModding implements ModInitializer {
 
 
     // Edit Biomes
-    /*
     private static ConfiguredFeature<?, ?> ORE_RUBY_OVERWORLD = Feature.ORE
             .configure(new OreFeatureConfig(
                     OreFeatureConfig.Rules.BASE_STONE_OVERWORLD,
@@ -68,7 +68,6 @@ public class TestModding implements ModInitializer {
                     18)))
             .spreadHorizontally()
             .repeat(10);
-     */
 
 
     // Loot Tables
@@ -84,6 +83,7 @@ public class TestModding implements ModInitializer {
         RegisterItems.register();
 
         // Spawn Ores
+        registerFeatures();
     }
 
     private void modifyLootTables()
@@ -97,5 +97,13 @@ public class TestModding implements ModInitializer {
                 supplier.withPool(poolBuilder.build());
             }
         }));
+    }
+
+    private void registerFeatures()
+    {
+        RegistryKey<ConfiguredFeature<?, ?>> oreRubyOverworld = RegistryKey.of(Registry.CONFIGURED_FEATURE_WORLDGEN,
+                new Identifier("testmodding", "ore_ruby_overworld"));
+        Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, oreRubyOverworld.getValue(), ORE_RUBY_OVERWORLD);
+        BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(), GenerationStep.Feature.UNDERGROUND_ORES, oreRubyOverworld);
     }
 }
