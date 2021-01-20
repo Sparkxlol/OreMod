@@ -2,6 +2,7 @@ package com.sparkxlol.testmodding;
 
 import com.sparkxlol.testmodding.registry.ModBlocks;
 import com.sparkxlol.testmodding.registry.ModItems;
+import com.sparkxlol.testmodding.registry.OreCaveFeature;
 import com.sparkxlol.testmodding.registry.RegisterItems;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
@@ -9,9 +10,6 @@ import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.fabricmc.fabric.api.loot.v1.FabricLootPoolBuilder;
 import net.fabricmc.fabric.api.loot.v1.event.LootTableLoadingCallback;
-import net.fabricmc.fabric.impl.biome.modification.BiomeModificationContextImpl;
-import net.fabricmc.fabric.impl.biome.modification.BiomeSelectionContextImpl;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -23,13 +21,11 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.BuiltinRegistries;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
-import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.GenerationStep;
+import net.minecraft.world.gen.decorator.ChanceDecoratorConfig;
 import net.minecraft.world.gen.decorator.Decorator;
 import net.minecraft.world.gen.decorator.RangeDecoratorConfig;
-import net.minecraft.world.gen.feature.ConfiguredFeature;
-import net.minecraft.world.gen.feature.Feature;
-import net.minecraft.world.gen.feature.OreFeatureConfig;
+import net.minecraft.world.gen.feature.*;
 
 public class TestModding implements ModInitializer {
 
@@ -74,6 +70,12 @@ public class TestModding implements ModInitializer {
     private static final Identifier EMERALD_ORE_LOOT_TABLE_ID = new Identifier("minecraft", "blocks/emerald_ore");
 
 
+    // Features
+    private static final Feature<DefaultFeatureConfig> ORE_CAVE = new OreCaveFeature(DefaultFeatureConfig.CODEC);
+    private static final ConfiguredFeature<?, ?> ORE_CAVE_CONFIGURED = ORE_CAVE.configure(FeatureConfig.DEFAULT)
+            .decorate(Decorator.CHANCE.configure(new ChanceDecoratorConfig(5)));
+
+
     // Initialize
     @Override
     public void onInitialize() {
@@ -85,6 +87,7 @@ public class TestModding implements ModInitializer {
         // Spawn Ores
         registerFeatures();
     }
+
 
     private void modifyLootTables()
     {
@@ -99,11 +102,18 @@ public class TestModding implements ModInitializer {
         }));
     }
 
+
     private void registerFeatures()
     {
         RegistryKey<ConfiguredFeature<?, ?>> oreRubyOverworld = RegistryKey.of(Registry.CONFIGURED_FEATURE_WORLDGEN,
                 new Identifier("testmodding", "ore_ruby_overworld"));
         Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, oreRubyOverworld.getValue(), ORE_RUBY_OVERWORLD);
         BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(), GenerationStep.Feature.UNDERGROUND_ORES, oreRubyOverworld);
+
+        Registry.register(Registry.FEATURE, new Identifier("testmodding", "ore_cave"), ORE_CAVE);
+        RegistryKey<ConfiguredFeature<?, ?>> oreCave = RegistryKey.of(Registry.CONFIGURED_FEATURE_WORLDGEN,
+                new Identifier("testmodding", "ore_cave"));
+        Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, oreCave.getValue(), ORE_CAVE_CONFIGURED);
+        BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(), GenerationStep.Feature.RAW_GENERATION, oreCave);
     }
 }
