@@ -73,7 +73,7 @@ public class TestModding implements ModInitializer {
     // Features
     private static final Feature<DefaultFeatureConfig> ORE_CAVE = new OreCaveFeature(DefaultFeatureConfig.CODEC);
     private static final ConfiguredFeature<?, ?> ORE_CAVE_CONFIGURED = ORE_CAVE.configure(FeatureConfig.DEFAULT)
-            .decorate(Decorator.CHANCE.configure(new ChanceDecoratorConfig(5)));
+            .decorate(Decorator.CHANCE.configure(new ChanceDecoratorConfig(80)));
 
 
     // Initialize
