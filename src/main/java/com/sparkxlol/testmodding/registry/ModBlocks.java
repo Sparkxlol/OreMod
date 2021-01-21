@@ -15,29 +15,43 @@ public class ModBlocks {
             .of(Material.METAL)
             .breakByTool(FabricToolTags.PICKAXES, 2)
             .requiresTool()
-            .strength(5f, 30f)
+            .strength(5f, 6f)
             .sounds(BlockSoundGroup.METAL));
 
     public static final Block SAPPHIRE_BLOCK = new Block(FabricBlockSettings
             .of(Material.METAL)
             .breakByTool(FabricToolTags.PICKAXES, 2)
             .requiresTool()
-            .strength(5f, 30f)
+            .strength(5f, 6f)
             .sounds(BlockSoundGroup.METAL));
 
     public static final Block AMETHYST_BLOCK = new Block(FabricBlockSettings
             .of(Material.METAL)
             .breakByTool(FabricToolTags.PICKAXES, 2)
             .requiresTool()
-            .strength(5f, 30f)
+            .strength(5f, 6f)
             .sounds(BlockSoundGroup.METAL));
 
     public static final Block RUBY_ORE = new Block(FabricBlockSettings
             .of(Material.METAL)
             .breakByTool(FabricToolTags.PICKAXES, 2)
             .requiresTool()
-            .strength(3f, 15f)
-            .sounds(BlockSoundGroup.METAL));
+            .strength(3f, 3f)
+            .sounds(BlockSoundGroup.STONE));
+
+    public static final Block SAPPHIRE_ORE = new Block(FabricBlockSettings
+            .of(Material.METAL)
+            .breakByTool(FabricToolTags.PICKAXES, 2)
+            .requiresTool()
+            .strength(3f, 3f)
+            .sounds(BlockSoundGroup.STONE));
+
+    public static final Block AMETHYST_ORE = new Block(FabricBlockSettings
+            .of(Material.METAL)
+            .breakByTool(FabricToolTags.PICKAXES, 2)
+            .requiresTool()
+            .strength(3f, 3f)
+            .sounds(BlockSoundGroup.STONE));
 
     public static void registerBlocks()
     {
@@ -45,5 +59,7 @@ public class ModBlocks {
         Registry.register(Registry.BLOCK, new Identifier(TestModding.MOD_ID, "sapphire_block"), SAPPHIRE_BLOCK);
         Registry.register(Registry.BLOCK, new Identifier(TestModding.MOD_ID, "amethyst_block"), AMETHYST_BLOCK);
         Registry.register(Registry.BLOCK, new Identifier(TestModding.MOD_ID, "ruby_ore"), RUBY_ORE);
+        Registry.register(Registry.BLOCK, new Identifier(TestModding.MOD_ID, "sapphire_ore"), SAPPHIRE_ORE);
+        Registry.register(Registry.BLOCK, new Identifier(TestModding.MOD_ID, "amethyst_ore"), AMETHYST_ORE);
     }
 }

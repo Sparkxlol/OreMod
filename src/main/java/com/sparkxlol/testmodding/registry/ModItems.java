@@ -19,6 +19,8 @@ public class ModItems {
     public static final BlockItem SAPPHIRE_BLOCK = new BlockItem(ModBlocks.SAPPHIRE_BLOCK, new Item.Settings().group(TestModding.ITEM_GROUP));
     public static final BlockItem AMETHYST_BLOCK = new BlockItem(ModBlocks.AMETHYST_BLOCK, new Item.Settings().group(TestModding.ITEM_GROUP));
     public static final BlockItem RUBY_ORE = new BlockItem(ModBlocks.RUBY_ORE, new Item.Settings().group(TestModding.ITEM_GROUP));
+    public static final BlockItem AMETHYST_ORE = new BlockItem(ModBlocks.AMETHYST_ORE, new Item.Settings().group(TestModding.ITEM_GROUP));
+    public static final BlockItem SAPPHIRE_ORE = new BlockItem(ModBlocks.SAPPHIRE_ORE, new Item.Settings().group(TestModding.ITEM_GROUP));
 
     public static void registerItems()
     {
@@ -27,7 +29,9 @@ public class ModItems {
         Registry.register(Registry.ITEM, new Identifier(TestModding.MOD_ID, "ruby_ore"), RUBY_ORE);
         Registry.register(Registry.ITEM, new Identifier(TestModding.MOD_ID, "sapphire"), SAPPHIRE);
         Registry.register(Registry.ITEM, new Identifier(TestModding.MOD_ID, "sapphire_block"), SAPPHIRE_BLOCK);
+        Registry.register(Registry.ITEM, new Identifier(TestModding.MOD_ID, "sapphire_ore"), SAPPHIRE_ORE);
         Registry.register(Registry.ITEM, new Identifier(TestModding.MOD_ID, "amethyst"), AMETHYST);
         Registry.register(Registry.ITEM, new Identifier(TestModding.MOD_ID, "amethyst_block"), AMETHYST_BLOCK);
+        Registry.register(Registry.ITEM, new Identifier(TestModding.MOD_ID, "amethyst_ore"), AMETHYST_ORE);
     }
 }

@@ -65,6 +65,30 @@ public class TestModding implements ModInitializer {
             .spreadHorizontally()
             .repeat(10);
 
+    private static ConfiguredFeature<?, ?> ORE_SAPPHIRE_OVERWORLD = Feature.ORE
+            .configure(new OreFeatureConfig(
+                    OreFeatureConfig.Rules.BASE_STONE_OVERWORLD,
+                    ModBlocks.SAPPHIRE_ORE.getDefaultState(),
+                    4))
+            .decorate(Decorator.RANGE.configure(new RangeDecoratorConfig(
+                    0,
+                    0,
+                    18)))
+            .spreadHorizontally()
+            .repeat(10);
+
+    private static ConfiguredFeature<?, ?> ORE_AMETHYST_OVERWORLD = Feature.ORE
+            .configure(new OreFeatureConfig(
+                    OreFeatureConfig.Rules.BASE_STONE_OVERWORLD,
+                    ModBlocks.AMETHYST_ORE.getDefaultState(),
+                    4))
+            .decorate(Decorator.RANGE.configure(new RangeDecoratorConfig(
+                    0,
+                    0,
+                    18)))
+            .spreadHorizontally()
+            .repeat(10);
+
 
     // Loot Tables
     private static final Identifier EMERALD_ORE_LOOT_TABLE_ID = new Identifier("minecraft", "blocks/emerald_ore");
@@ -109,6 +133,16 @@ public class TestModding implements ModInitializer {
                 new Identifier("testmodding", "ore_ruby_overworld"));
         Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, oreRubyOverworld.getValue(), ORE_RUBY_OVERWORLD);
         BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(), GenerationStep.Feature.UNDERGROUND_ORES, oreRubyOverworld);
+
+        RegistryKey<ConfiguredFeature<?, ?>> oreSapphireOverworld = RegistryKey.of(Registry.CONFIGURED_FEATURE_WORLDGEN,
+                new Identifier("testmodding", "ore_sapphire_overworld"));
+        Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, oreSapphireOverworld.getValue(), ORE_SAPPHIRE_OVERWORLD);
+        BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(), GenerationStep.Feature.UNDERGROUND_ORES, oreSapphireOverworld);
+
+        RegistryKey<ConfiguredFeature<?, ?>> oreAmethystOverworld = RegistryKey.of(Registry.CONFIGURED_FEATURE_WORLDGEN,
+                new Identifier("testmodding", "ore_amethyst_overworld"));
+        Registry.register(BuiltinRegistries.CONFIGURED_FEATURE, oreAmethystOverworld.getValue(), ORE_AMETHYST_OVERWORLD);
+        BiomeModifications.addFeature(BiomeSelectors.foundInOverworld(), GenerationStep.Feature.UNDERGROUND_ORES, oreAmethystOverworld);
 
         Registry.register(Registry.FEATURE, new Identifier("testmodding", "ore_cave"), ORE_CAVE);
         RegistryKey<ConfiguredFeature<?, ?>> oreCave = RegistryKey.of(Registry.CONFIGURED_FEATURE_WORLDGEN,

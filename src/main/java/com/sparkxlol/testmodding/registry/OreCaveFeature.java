@@ -1,7 +1,8 @@
 package com.sparkxlol.testmodding.registry;
 
 import com.mojang.serialization.Codec;
-import jdk.nashorn.internal.ir.Block;
+import com.sun.org.apache.xpath.internal.operations.Mod;
+import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
@@ -26,6 +27,7 @@ public class OreCaveFeature extends Feature<DefaultFeatureConfig> {
 
         int randY = (int)(Math.random() * (topPos.getY() - botPos.getY() + 1) + botPos.getY());
         int height = (int)(Math.random() * (7 - 3 + 1) + 3);
+        Block[] ores = { ModBlocks.RUBY_ORE, ModBlocks.SAPPHIRE_ORE, ModBlocks.AMETHYST_ORE };
 
         BlockPos currentPos = new BlockPos(topPos.getX(), randY, topPos.getZ());
 
@@ -36,9 +38,9 @@ public class OreCaveFeature extends Feature<DefaultFeatureConfig> {
 
             while (newHeight >= 0) {
                 if (newHeight == 0)
-                    world.setBlockState(currentPos, ModBlocks.RUBY_ORE.getDefaultState(), 3);
+                    world.setBlockState(currentPos, ores[(int)(Math.random() * (2 + 1) + 0)].getDefaultState(), 3);
                 else {
-                    spawnRing(currentPos, newHeight, world);
+                    spawnRing(currentPos, newHeight, world, ores);
                     currentPos = new BlockPos(currentPos.getX() + 1, currentPos.getY() + 1, currentPos.getZ() + 1);
                 }
                 newHeight -= 2;
@@ -49,9 +51,9 @@ public class OreCaveFeature extends Feature<DefaultFeatureConfig> {
 
             while (newHeight >= 0) {
                 if (newHeight == 0)
-                    world.setBlockState(savedPos, ModBlocks.RUBY_ORE.getDefaultState(), 3);
+                    world.setBlockState(savedPos, ores[(int)(Math.random() * (2 + 1) + 0)].getDefaultState(), 3);
                 else {
-                    spawnRing(savedPos, newHeight, world);
+                    spawnRing(savedPos, newHeight, world, ores);
                     savedPos = new BlockPos(savedPos.getX() + 1, savedPos.getY() - 1, savedPos.getZ() + 1);
                 }
                 newHeight -= 2;
@@ -63,13 +65,13 @@ public class OreCaveFeature extends Feature<DefaultFeatureConfig> {
         //Need to work on spawning last piece at newHeight = 1 :)
     }
 
-    private void spawnRing(BlockPos currentPos, int height, StructureWorldAccess world)
+    private void spawnRing(BlockPos currentPos, int height, StructureWorldAccess world, Block[] ores)
     {
         int direction = 0;
 
         for (int x = 0; x < 4; x++) {
             for (int i = 0; i < height; i++) {
-                world.setBlockState(currentPos, ModBlocks.RUBY_ORE.getDefaultState(), 3);
+                world.setBlockState(currentPos, ores[(int)(Math.random() * (2 + 1) + 0)].getDefaultState(), 3);
 
                 if (direction == 0)
                     currentPos = new BlockPos(currentPos.getX() + 1, currentPos.getY(), currentPos.getZ());
